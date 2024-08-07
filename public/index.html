@@ -1,22 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
+    <link rel="stylesheet" type="text/css" href="./css/live2d.css">
+    <link rel="stylesheet" type="text/css" href="./css/waifu.css">
+    <link rel="stylesheet" type="text/css" href="./css/flat-ui.min.css">
+    <link rel="stylesheet" href="./css/back.css">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
 
   </head>
 
-
   <body>
     <noscript>
       <strong>Something seems error!Try again!!!</strong>
     </noscript>
+    <div class="line" id="line" style="right: 4vw;"></div>
+
+    <div class="day" id="back">
+      <div class="cloud cloud1" id="c1"></div>
+      <div class="cloud cloud2" id="c2"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+    </div>
     
-    <button hx-get="logo.txt" hx-target="#tet"></button>
-    <p id="tet"></p>
+    <div class="waifu" style="position: fixed;bottom:-7vh;">
+      <div class="waifu-tips"></div>
+      <canvas id="live2d"  width= "300" height= "400" class="live2d"></canvas>
+      <div class="waifu-tool">
+          <span class="fui-chat"></span>
+          <span class="fui-user"></span>
+          <span class="fui-cross"></span>
+      </div>
+    </div>
+    
+    
+    <input type="text" style="display: none;" id="daytype" value="day">
 
     <div id="app"></div>
     <!-- built files will be auto injected -->
@@ -27,10 +58,35 @@
 
   
 <script src="js/jquery-3.7.1.min.js"></script>
+<script src="js/live2d.js"></script>
+<script src="js/waifu-tips.js"></script>
+<script type="text/javascript">initModel("assets/")</script>
   <script>// outer jquery plugin
+
+   
+
       $(document).ready(function() {
-          console.log('jquery is working');
+        $('#line').click(()=>{
+          document.getElementById('line').addEventListener('click', function() {
+            var rLine=document.getElementById('line');
+            rLine.classList.toggle('collapsed');
+            
+            $('#c1').toggle();
+            $('#c2').toggle();
+            if($('#back').hasClass('day'))
+            {
+              $('#back').removeClass('day');
+              $('#back').addClass('night');
+            }else
+            {
+              $('#back').removeClass('night');
+              $('#back').addClass('day');
+            }
+          });
+          
+        });
       });
+      
   </script>
 </html>
 

@@ -1,0 +1,158 @@
+
+.day {
+    position: fixed;
+    z-index: -100;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at top right, rgba(255, 255, 224, 0.6), rgba(255, 255, 224, 0) 50%), linear-gradient(to bottom, #87CEEB, #87CEEB 30%, #FFFFFF 70%, #FFFFFF 100%);
+
+  }
+
+  .cloud {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 20px #ffffff;
+    opacity: 0.8;
+    animation: float-c 10s linear infinite;
+    z-index: 0;
+  }
+  .cloud1 {
+    width: 250px;
+    height: 70px;
+    top: 20%;
+    left: -250px;
+    animation-delay: 0s;
+  }
+  
+  .cloud2 {
+    width: 150px;
+    height: 50px;
+    top: 40%;
+    left: -150px;
+    animation-delay: 4s;
+  }
+  
+  @keyframes float-c {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100vw);
+    }
+  }
+
+  @keyframes drift {
+    from { background-position: 0 0, 0 200px; }
+    to { background-position: 100% 0, 100% 200px; }
+  }
+
+.night{
+    position: fixed;
+    z-index: -100;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(45deg, #767574, #794545, #1f1120, #151805);
+
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%, 100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 1;
+    }
+  }
+  
+  .star:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+          .star:nth-child(2) { top: 30%; left: 40%; animation-delay: 0.5s; }
+          .star:nth-child(3) { top: 50%; left: 60%; animation-delay: 1s; }
+          .star:nth-child(4) { top: 70%; left: 80%; animation-delay: 1.5s; }
+          .star:nth-child(5) { top: 20%; left: 70%; animation-delay: 2s; }
+          .star:nth-child(6) { top: 40%; left: 30%; animation-delay: 2.5s; }
+          .star:nth-child(7) { top: 60%; left: 50%; animation-delay: 3s; }
+          .star:nth-child(8) { top: 80%; left: 10%; animation-delay: 3.5s; }
+          .star:nth-child(9) { top: 15%; left: 25%; animation-delay: 4s; }
+          .star:nth-child(10) { top: 35%; left: 45%; animation-delay: 4.5s; }
+          .star:nth-child(11) { top: 55%; left: 65%; animation-delay: 5s; }
+          .star:nth-child(12) { top: 75%; left: 85%; animation-delay: 5.5s; }
+          .star:nth-child(13) { top: 25%; left: 75%; animation-delay: 6s; }
+          .star:nth-child(14) { top: 45%; left: 35%; animation-delay: 6.5s; }
+  
+
+
+  .line{
+    transform-origin: center top;
+    position: fixed;
+    top: 0;
+    right: 4vw;
+    height: 60vh;
+    width: 0.5vw;
+    background-color: #000;
+    z-index: 1000;
+    cursor: pointer; /* 添加指针，表示可点击 */
+    transition: height 1s ease; /* 平滑过渡效果 */
+    animation: roll 1.5s infinite alternate; 
+    border-radius: 50%; /* 圆角效果 */
+    box-shadow: 
+      0 0 5px rgba(0, 0, 0, 0.5), /* 阴影效果 */
+      inset 0 0 5px rgba(255, 255, 255, 0.3); /* 内部阴影效果 */
+  }
+  .line::after{
+    content: '';
+    background-image: url('http://q2.qlogo.cn/headimg_dl?dst_uin=2041584846&spec=100');
+    background-size: cover; /* 确保背景图片覆盖整个伪元素 */
+    
+    position: absolute;
+    transition: 1s ease; /* 平滑过渡效果 */
+    bottom: -2.5vw;
+    right: -2.5vw;
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    border: 2px solid black;
+    box-shadow: 0 0 5vh rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(255, 255, 255, 0.3);
+    animation: flowShadow 1s linear infinite;
+  }
+
+ 
+
+
+  .line.collapsed{
+    height: 10vh;
+  }
+  @keyframes roll {
+    0%  {
+  
+      transform:  rotate(-3deg);
+  
+      
+    }
+    100% {
+  
+      transform:  rotate(16deg);
+  
+      
+    }
+  }
+  
+  @keyframes flowShadow{
+    0%, 100% {
+      border-color: #4B0082; /* 深紫色 */
+      box-shadow: 0 0 10px #4B0082, 0 0 20px #4B0082, 0 0 30px #4B0082; /* 深紫色阴影 */
+    }
+    50% {
+      border-color: #8A2BE2; /* 亮紫色 */
+      box-shadow: 0 0 10px #8A2BE2, 0 0 20px #8A2BE2, 0 0 30px #8A2BE2; /* 亮紫色阴影 */
+    }
+  }
+  

@@ -10,7 +10,7 @@
     
     
     export default {
-      name: 'UserIndex',
+      name: 'UserUnit',
       props: {
         msg: String
       },
