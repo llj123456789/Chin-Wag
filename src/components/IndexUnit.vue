@@ -4,7 +4,6 @@
     <div id="output" >data</div>
     <img src="@/assets/logo.png">
     
-    
     </template>
     <script >
     

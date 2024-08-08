@@ -13,7 +13,8 @@ const routes = [
     meta:{
         title: 'Login'
     },
-  
+    keepAlive: true,
+    useTransition: true
   }
   ,
   {
@@ -23,42 +24,47 @@ const routes = [
     meta:{
         title: 'Chat Index'
     },
-    children:[
-
-      {
-        path: '/about',
-        name: 'About',
-        component: About,
-        meta:{
-            title: 'About Page'
-        }
-      },
-      {
-        path: '/user/:id',
-        name: 'User',
-        component: User,
-        props: true,
-        beforeEnter: (to, from, next) => {
-          console.log('beforeEnter:', to, from)
-          next()
-        },
-        meta: {
-          title: 'User Detail'
-        }
-      },
-      {
-        path: '/home',
-        name: 'Home',
-        component: {
-            default:Home,
-    
-        },
-        meta: {
-          title: 'Home Page'
-        }
-      }
-    ]
+    keepAlive: true,
+    useTransition: true
   },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta:{
+        title: 'About Page'
+    },
+    keepAlive: true,
+    useTransition: true
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User,
+    props: true,
+    beforeEnter: (to, from, next) => {
+      console.log('beforeEnter:', to, from)
+      next()
+    },
+    meta: {
+      title: 'User Detail'
+    },
+    keepAlive: true,
+    useTransition: true
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home,
+    meta: {
+      title: 'Home Page'
+    },
+    keepAlive: true,
+    useTransition: true
+  },
+  {
+
+  }
 
 ]
 
