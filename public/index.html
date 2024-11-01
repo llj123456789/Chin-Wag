@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
+    <script src="<%= BASE_URL %>js/jquery-3.7.1.min.js"></script>
+    <script src="<%= BASE_URL %>js/live2d.js"></script>
+    <script src="<%= BASE_URL %>js/waifu-tips.js"></script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/live2d.css">
-    <link rel="stylesheet" type="text/css" href="./css/waifu.css">
-    <link rel="stylesheet" type="text/css" href="./css/flat-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/fontawesome.min.css">
-    <link rel="stylesheet" href="./css/back.css">
+    <link rel="stylesheet" type="text/css" href="<%= BASE_URL %>css/waifu.css">
+    <link rel="stylesheet" type="text/css" href="<%= BASE_URL %>css/flat-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="<%= BASE_URL %>css/fontawesome.min.css">
+    <link rel="stylesheet" href="<%= BASE_URL %>css/back.css">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>IDTOline</title>
 
   </head>
 
@@ -59,10 +62,7 @@
 
 
   
-<script src="js/jquery-3.7.1.min.js"></script>
-<script src="js/live2d.js"></script>
-<script src="js/waifu-tips.js"></script>
-<script type="text/javascript">initModel("assets/")</script>
+  <script type="text/javascript">initModel("assets/")</script>
   <script>// outer jquery plugin
 
    

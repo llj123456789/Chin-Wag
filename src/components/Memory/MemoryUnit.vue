@@ -1,14 +1,14 @@
 
 <template>
-  
-建设中
+  云存储搭建中，wait for wait<br>
     
 </template>
     <script >
     
     
     export default {
-      name: 'UserUnit',
+      name: 'MemoryUnit',
+
       data()
       {
         return {
@@ -17,19 +17,13 @@
       },
       methods:{
         
-        afterHtmx(){
-          this.$nextTick(()=>{
-            console.log('htmx');
-          })
-        }
+        
         
       },
       
       mounted(){
-        console.log("mounted")
       },
       beforeUnmount(){
-        console.log("beforeDestroy")
       },
       
       

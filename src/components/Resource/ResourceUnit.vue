@@ -1,18 +1,14 @@
 
 <template>
-    <button hx-get="logo.txt" hx-target="#output" @htmx:afterRequest="afterHtmx">Fetch Data</button>
-    <div id="output" >data</div>
-    <p>{{ msg }} </p>
-    
-    </template>
+  云存储搭建中，wait for wait<br>
+
+</template>
     <script >
     
     
     export default {
-      name: 'AboutIndex',
-      props: {
-        msg: String
-      },
+      name: 'ResourceUnit',
+
       data()
       {
         return {
@@ -21,11 +17,7 @@
       },
       methods:{
         
-        afterHtmx(){
-          this.$nextTick(()=>{
-            console.log('htmx');
-          })
-        }
+        
         
       },
       

@@ -23,8 +23,8 @@
     <input type="text" id="account" name="account" placeholder="请输入账号(1-16位)" class="put" minlength="1" maxlength="16" @input="filterAccount" v-model="nowaccount">
     <input type="password" id="pwd" name="pwd" placeholder="请输入密码(8-16位)" class="put" minlength="8" maxlength="16" @input="filterPassword"  v-model="nowpwd">
     <button class="post" @click="LOGIN">Login</button>
+    
   </form>
-
   <div class="card" style="position: fixed;right: 8vw;top: 15vh;">
     <div class="img"></div>
   <div class="textBox">
@@ -39,7 +39,7 @@
 
   <div style="position: absolute;left: 50vw;top: 73vh;">
     <span>注册即代表同意</span>
-    <a href="https://www.scustu.cn/privacy" target="_blank">用户协议和隐私条款</a>
+    <a href="https://www.scustu.cn/privacy.html" target="_blank">用户协议和隐私条款</a>
   </div>
   <div class="lines" style="left: 4vw;"></div>
   <div class="lines" style="left: 20vw;"></div>
@@ -69,6 +69,7 @@
     <p style="position: absolute;right: 50%;transform :translateX(50%);top:40vh;font-size: 12px;"><strong>右侧输入账号密码注册</strong></p>
       
     <button @click="REGIST" class="btn" style="position: absolute;right: 50%;transform :translateX(50%);top:45vh">regist</button>
+    <input class="put" v-model="verify" v-if="rg" placeholder="请输入验证码" style="position: absolute;bottom:-7vh;left: 20%;width: 10vw;">
   </div>
 
 
@@ -81,12 +82,9 @@
 import axios  from 'axios';
 export default {
   name: 'LoginUnit',
-  props: {
-    // 接收父组件传来的参数
-    
-  },
   data()
   {
+    this.$s
     
     return {
       selectedHeadFile: null,
@@ -94,10 +92,14 @@ export default {
       nowpwd:'',
       headUrl:'',
       time:'',
-
-
+      isRoot: false,
+      mem:'10',
+      rg: false,
+      verify:'',
+      key:''
     } 
   },
+
   methods:{
 
       updateHeadUrl()
@@ -132,27 +134,37 @@ export default {
         alert('密码长度不符合要求');
         return;
       }
-      
-      console.log('login');
       axios.post('https://api.scustu.cn/login',{
         account:this.nowaccount,
-        password:this.nowpwd
-
+        password:this.nowpwd,
       })
       .then(response=>{
         
         if(response.data.message=='SUCCESS')
       {
+        this.mem=response.data.mem;
+        this.isRoot=response.data.isRoot;
+
+        const data={
+            account:this.nowaccount,
+            headUrl:this.headUrl,
+            mem:this.mem,
+            isRoot:this.isRoot,
+            temp:response.data.temp,
+
+        }
+
+        this.$store.dispatch('login',data)
         this.$router.push({
           path:'/home',
           query:{
-            account:this.nowaccount,
-            headUrl:this.headUrl
+            page:'index'
           }
         });
       }
       else{
         alert('登录失败: '+response.data.message);
+      
       }
         
       })
@@ -172,15 +184,47 @@ export default {
     REGIST(event)
     {
        event.preventDefault();
+       if(this.rg==false)
+       {
+        this.rg = true;
+        axios.get('https://api.scustu.cn/verify',{
+
+        }).then(response => {
+          this.key=response.data.key;
+          alert(`验证码：${this.key}`)
+        }).catch(error => {
+          if (error.response) {
+            // 服务器返回的错误信息
+            alert(`获取验证码失败: ${error.response.data.message}`);
+          } else if (error.request) {
+            // 请求已发送但没有收到响应
+            alert('获取验证码失败: 没有收到服务器响应');
+          } else {
+            // 其他错误
+            alert(`获取验证码失败: ${error.message}`);
+          }
+        });
+        return;
+       }
       if (!this.nowaccount || !this.nowpwd || !this.selectedHeadFile) {
         alert('请填写账号密码并上传头像');
+        return;
+      }
+      if(!this.verify)
+      {
+        alert('请填写验证码');
+        return;
+      }
+      if(this.key!=this.verify)
+      {
+        alert('验证码不正确');
         return;
       }
       const formData = new FormData();
       formData.append('account', this.nowaccount);
       formData.append('password', this.nowpwd);
       formData.append('image', this.selectedHeadFile);
-      console.log(formData);
+      formData.append('key', this.verify);
 
       axios.post('https://api.scustu.cn/register',formData,{
         headers: {
@@ -188,22 +232,20 @@ export default {
         }
       })
       .then(response=>{
+        this.rg=false;
         if(response.data.message=='SUCCESS')
           {
-            alert('注册成功,自动登录');
-            this.$router.push({
-              path:'/home',
-              query:{
-                account:this.nowaccount,
-                headUrl:this.headUrl
-          }
-        });
+
+            alert('注册成功');
+          
+
           }else{
             alert('注册失败: '+response.data.message);
           }
         
       })
       .catch(error => {
+        this.rg=false;
         if (error.response) {
           // 服务器返回的错误信息
           alert(`注册失败: ${error.response.data.message}`);
@@ -220,7 +262,6 @@ export default {
 
     afterHtmx(){
       this.$nextTick(()=>{
-        console.log('htmx');
       })
     },
     triggerFileUpload() {
@@ -257,12 +298,10 @@ export default {
   
   
   mounted(){
-    console.log("mounted");
     this.getNowTime();
     this.headUrl = 'https://api.scustu.cn/user/' + this.nowaccount + '/head';
   },
   beforeUnmount(){
-    console.log("beforeDestroy")
   },
   
   

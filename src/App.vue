@@ -1,4 +1,5 @@
 <template>
+ 
 <div id="app">
   <div class="bar" id="bar">
     <img src="./assets/aboy.png" style="display: inline;width: 20vh;position: relative;top: -3vh;">
@@ -78,6 +79,7 @@
 
 <script setup>
 import { onMounted,ref,computed, } from 'vue';
+
 const isCollapsed=ref(true);
 const isDropdownOpen=ref(false);
 const isDropdownOpen2=ref(false);
@@ -86,6 +88,7 @@ const staytime_s=ref(0);
 const selectedOption = ref(null);
 const selectedOption2 = ref(null);
 const showWhiteboard=ref(false);
+
 
 
 const beforeHtmxSubmit = () => {
@@ -141,8 +144,6 @@ onMounted(() => {
 <script>
 export default {
   name: 'App',
-  components: [
-]
 };
 </script>
 
@@ -354,9 +355,10 @@ export default {
   width: 70vw;
   height: 80vh;
   border: 2px solid black;
-  box-shadow: 5vh 3vh 1vh rgba(0, 0, 0, 0.5), 0 0 3vh rgba(0, 0, 0, 0.5), 0 1vh 0vh rgba(0, 0, 0, 0.3);
+  box-shadow: 5vh 4vh 1vh rgba(0, 0, 0, 0.5), 0 0 3vh rgba(0, 0, 0, 0.5), 0 1vh 0vh rgba(0, 0, 0, 0.3);
   transform: translateY(20deg);
   margin-top: 5vh;
+  overflow: hidden;
 
 }
 

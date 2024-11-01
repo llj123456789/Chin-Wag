@@ -2,8 +2,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import 'htmx.org'
 import router from './router/index.js'
+import store from './store/index.js';
 
-const app=createApp(App)
-app.use(router)
-app.mount('#app')
+createApp(App)
+.use(store)
+.use(router)
+.mount('#app')
 
